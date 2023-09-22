@@ -1,23 +1,31 @@
+// src/pages/ProjectsPage.jsx
+// ... previous imports stay unchanged
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";     // <== IMPORT
 
-function ProjectsPage (props) {
+function ProjectsPage(props) {
   const [projects, setProjects] = useState([]);
 
-  // This effect depends on `props.projects`.
-  // It will run on initial render and every time
-  // when the `props.projects` gets updated.
+  // This effect will run only once on the initial render.
+  // To do it we set the dependency array empty [].
   useEffect(() => {
     setProjects(props.projects);
   }, [props.projects]);
 
-
   return (
     <div>
-      <h1>Projects</h1>
+      <h2>Projects</h2>
       {projects.map((project) => {
         return (
           <div key={project._id} className="project">
-            <h3>{project.name}</h3>
+            <h3>
+              
+              {/*   ADD   */}
+              <Link to={`/projects/${project._id}`}> 
+                {project.name} 
+              </Link>
+              
+            </h3>
             <p>{project.technologies}</p>
           </div>
         );
